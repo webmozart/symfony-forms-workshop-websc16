@@ -4,6 +4,23 @@ parameters:
 #    parameter_name: value
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    contact_command_handler:
+        class: Contacts\Application\Contact\ContactCommandHandler
+        arguments: ['@contact_repository']
+        tags:
+            - { name: command_handler, handles: 'Contacts\Application\Contact\ProposeContact', method: handleProposeContact }
+            - { name: command_handler, handles: 'Contacts\Application\Contact\ApproveContact', method: handleApproveContact }
+            - { name: command_handler, handles: 'Contacts\Application\Contact\RejectContact', method: handleRejectContact }
+            - { name: command_handler, handles: 'Contacts\Application\Contact\ModifyContact', method: handleModifyContact }
+            - { name: command_handler, handles: 'Contacts\Application\Contact\MergeContacts', method: handleMergeContacts }
+            - { name: command_handler, handles: 'Contacts\Application\Contact\DeleteContact', method: handleDeleteContact }
+
+    contact_repository:
+        class: Contacts\Domain\Contact\ContactRepository
+        factory: ['@=service("doctrine").getManagerForClass("Contacts\\Domain\\Contact\\Contact")', getRepository]
+        arguments: [Contacts\Domain\Contact\Contact]
+
+    organization_repository:
+        class: Contacts\Domain\Organization\OrganizationRepository
+        factory: ['@=service("doctrine").getManagerForClass("Contacts\\Domain\\Organization\\Organization")', getRepository]
+        arguments: [Contacts\Domain\Organization\Organization]

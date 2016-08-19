@@ -4,7 +4,7 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "": "src/"
+            "Contacts\\": "src/"
         },
         "classmap": [
             "app/AppKernel.php",
@@ -27,7 +27,10 @@
         "symfony/polyfill-apcu": "^1.0",
         "sensio/distribution-bundle": "^5.0",
         "sensio/framework-extra-bundle": "^3.0.2",
-        "incenteev/composer-parameter-handler": "^2.0"
+        "incenteev/composer-parameter-handler": "^2.0",
+        "ramsey/uuid": "^3.5",
+        "simple-bus/symfony-bridge": "^4.1",
+        "simple-bus/doctrine-orm-bridge": "^4.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

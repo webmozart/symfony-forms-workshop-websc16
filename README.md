@@ -1,4 +1,5 @@
-symfony-forms-workshop-websc16
-==============================
+Forms Workshop Web Summer Camp 2016
+===================================
 
-A Symfony project created on August 19, 2016, 8:51 am.
+This is the repository for the Symfony Forms workshop
+at the Web Summer Camp 2016 in Rovinj, Croatia.

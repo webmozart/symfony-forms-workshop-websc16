@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="page-header">Approved Contacts</h1>
+
+    {% if contacts|length > 0 %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for contact in contacts %}
+                    <tr>
+                        <td>{{ contact.fullName }}</td>
+                        <td>{{ contact.email }}</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a href="{{ path('contact_show', {id: contact.id}) }}" class="btn btn-success">
+                                    Show
+                                </a>
+                                <a href="{{ path('contact_modify', {id: contact.id}) }}" class="btn btn-primary">
+                                    Modify
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>You're all alone...</p>
+    {% endif %}
+
+    <a href="{{ path('proposal_propose') }}" class="btn btn-default">Propose Contact</a>
+{% endblock %}

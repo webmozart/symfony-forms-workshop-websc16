@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="page-header">Organizations</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for organization in organizations %}
+                <tr>
+                    <td>{{ organization.name }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('proposal_propose') }}" class="btn btn-default">Propose</a>
+{% endblock %}

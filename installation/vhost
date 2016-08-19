@@ -1,0 +1,35 @@
+
+<VirtualHost *:80>
+    ServerName forms.websc
+    DocumentRoot /var/www/summercamp/workshops/forms/web
+    DirectoryIndex app.php
+
+    <Directory /var/www/summercamp/workshops/forms/web>
+        Options FollowSymLinks
+        AllowOverride None
+        Require all granted
+        SetEnv SYMFONY_ENV dev
+    </Directory>
+
+    <IfModule mod_rewrite.c>
+        RewriteEngine On
+
+        # Makes it possible to place your favicon at the root of your eZ Platform instance.
+        # It will then be served directly.
+        RewriteRule ^/favicon\.ico - [L]
+
+        # Give direct access to robots.txt for use by crawlers (Google, Bing, Spammers...)
+        RewriteRule ^/robots\.txt - [L]
+
+        # The following rule is needed to correctly display bundle and project assets
+        RewriteRule ^/bundles/ - [L]
+
+        # Additional Assetic rules for environments different from dev,
+        # remember to run php app/console assetic:dump --env=prod
+        RewriteCond %{ENV:SYMFONY_ENV} !^(dev)
+        RewriteRule ^/(css|js|fonts?)/.*\.(css|js|otf|eot|ttf|svg|woff) - [L]
+
+        RewriteRule .* /app.php
+    </IfModule>
+
+</VirtualHost>
