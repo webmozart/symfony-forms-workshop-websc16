@@ -13,7 +13,7 @@
         {{ _self.endFormRow() }}
 
         {{ _self.beginFormRow('Date of birth') }}
-            {{ contact.dateOfBirth|date('d/m/Y') }}
+            {{ contact.dateOfBirth ? contact.dateOfBirth|date('d/m/Y') }}
         {{ _self.endFormRow() }}
 
         {{ _self.beginFormRow('Email') }}
@@ -42,12 +42,14 @@
     </div>
 
     <div class="btn-group" role="group">
-        <a href="{{ path('contact_edit', {id: contact.id}) }}" class="btn btn-default">
-            Modify
-        </a>
-        <a href="{{ path('contact_delete', {id: contact.id}) }}" class="btn btn-danger">
-            Delete
-        </a>
+        <div class="btn-group" role="group">
+            <a href="{{ path('proposal_approve', {id: contact.id}) }}" class="btn btn-success">
+                Approve
+            </a>
+            <a href="{{ path('proposal_reject', {id: contact.id}) }}" class="btn btn-danger">
+                Reject
+            </a>
+        </div>
     </div>
 {% endblock %}
 

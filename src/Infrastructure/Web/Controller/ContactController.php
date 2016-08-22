@@ -4,7 +4,7 @@ namespace Contacts\Infrastructure\Web\Controller;
 
 use Contacts\Application\Contact\DeleteContact;
 use Contacts\Domain\Contact\ContactId;
-use Contacts\Infrastructure\Web\Form\ModifyContactType;
+use Contacts\Infrastructure\Util\ObjectArray;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,8 +21,13 @@ class ContactController extends Controller
     {
         $contacts = $this->get('contact_repository')->findApproved();
 
+        $organizationNames = $this->get('organization_repository')->findNames(
+            array_unique(ObjectArray::map('getOrganizationId', $contacts))
+        );
+
         return $this->render('contact/list.html.twig', [
             'contacts' => $contacts,
+            'organizationNames' => $organizationNames,
         ]);
     }
 
@@ -37,24 +42,16 @@ class ContactController extends Controller
     }
 
     /**
-     * @Route("/{id}/modify", name="contact_modify")
+     * @Route("/{id}/edit", name="contact_edit")
      */
-    public function modifyAction(Request $request, $id)
+    public function editAction(Request $request, $id)
     {
         $contact = $this->get('contact_repository')->get(ContactId::fromString($id));
 
-        $form = $this->createForm(ModifyContactType::class, $contact);
-        $form->handleRequest($request);
+        // TODO create form and pass to view
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->get('command_bus')->handle($form->getData());
-
-            return $this->redirectToRoute('contact_list');
-        }
-
-        return $this->render('contact/modify.html.twig', [
+        return $this->render('contact/edit.html.twig', [
             'contact' => $contact,
-            'form' => $form->createView(),
         ]);
     }
 

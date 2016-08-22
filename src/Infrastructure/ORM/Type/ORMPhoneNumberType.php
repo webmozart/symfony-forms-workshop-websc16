@@ -2,28 +2,28 @@
 
 namespace Contacts\Infrastructure\ORM\Type;
 
-use Contacts\Domain\Contact\ContactId;
+use Contacts\Domain\Value\PhoneNumber;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
 
-class ContactIdType extends StringType
+class ORMPhoneNumberType extends StringType
 {
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
         $value = parent::convertToPHPValue($value, $platform);
 
-        return $value ? ContactId::fromString($value) : null;
+        return $value ? PhoneNumber::fromString($value) : null;
     }
 
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        $value = $value instanceof ContactId ? $value->toString() : null;
+        $value = $value instanceof PhoneNumber ? $value->toString() : null;
 
         return parent::convertToDatabaseValue($value, $platform);
     }
 
     public function getName()
     {
-        return 'contact_id';
+        return 'phone_number';
     }
 }

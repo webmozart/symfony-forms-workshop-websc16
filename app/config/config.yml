@@ -50,11 +50,11 @@ doctrine:
         password: "%database_password%"
         charset:  UTF8
         types:
-            contact_id: "Contacts\\Infrastructure\\ORM\\Type\\ContactIdType"
-            contact_ids: "Contacts\\Infrastructure\\ORM\\Type\\ContactIdsType"
-            organization_id: "Contacts\\Infrastructure\\ORM\\Type\\OrganizationIdType"
-            email: "Contacts\\Infrastructure\\ORM\\Type\\EmailType"
-            phone_number: "Contacts\\Infrastructure\\ORM\\Type\\PhoneNumberType"
+            contact_id: "Contacts\\Infrastructure\\ORM\\Type\\ORMContactIdType"
+            contact_ids: "Contacts\\Infrastructure\\ORM\\Type\\ORMContactIdsType"
+            organization_id: "Contacts\\Infrastructure\\ORM\\Type\\ORMOrganizationIdType"
+            email: "Contacts\\Infrastructure\\ORM\\Type\\ORMEmailType"
+            phone_number: "Contacts\\Infrastructure\\ORM\\Type\\ORMPhoneNumberType"
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"

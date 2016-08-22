@@ -2,6 +2,7 @@
 
 namespace Contacts\Domain\Contact;
 
+use Contacts\Domain\Organization\OrganizationId;
 use Contacts\Domain\Value\Address;
 use Contacts\Domain\Value\Email;
 use Contacts\Domain\Value\PhoneNumber;
@@ -10,19 +11,21 @@ use MongoDB\Driver\Exception\InvalidArgumentException;
 
 class Contact
 {
-    const FIRST_NAME = 'firstName';
+    const FIELD_FIRST_NAME = 'firstName';
 
-    const LAST_NAME = 'lastName';
+    const FIELD_LAST_NAME = 'lastName';
 
-    const DATE_OF_BIRTH = 'dateOfBirth';
+    const FIELD_DATE_OF_BIRTH = 'dateOfBirth';
 
-    const EMAIL = 'email';
+    const FIELD_EMAIL = 'email';
 
-    const ADDRESS = 'address';
+    const FIELD_ADDRESS = 'address';
 
-    const PHONE_NUMBER = 'phoneNumber';
+    const FIELD_PHONE_NUMBER = 'phoneNumber';
 
-    const NOTES = 'notes';
+    const FIELD_NOTES = 'notes';
+
+    const FIELD_ORGANIZATION_ID = 'organizationId';
 
     /**
      * @var ContactId
@@ -38,6 +41,11 @@ class Contact
      * @var ContactId[]
      */
     private $mergedIds = [];
+
+    /**
+     * @var OrganizationId
+     */
+    private $organizationId;
 
     /**
      * @var string
@@ -185,6 +193,14 @@ class Contact
     }
 
     /**
+     * @return OrganizationId
+     */
+    public function getOrganizationId()
+    {
+        return $this->organizationId;
+    }
+
+    /**
      * @param ContactId $id
      */
     private function __construct(ContactId $id)
@@ -246,5 +262,13 @@ class Contact
     private function modifyNotes($notes)
     {
         $this->notes = $notes ? (string) $notes : null;
+    }
+
+    /**
+     * @param OrganizationId $organizationId
+     */
+    private function modifyOrganizationId(OrganizationId $organizationId = null)
+    {
+        $this->organizationId = $organizationId;
     }
 }

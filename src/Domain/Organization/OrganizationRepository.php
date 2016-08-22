@@ -13,6 +13,13 @@ interface OrganizationRepository
      */
     public function get(OrganizationId $id);
 
+    /**
+     * @param OrganizationId[] $ids
+     *
+     * @return string[]
+     */
+    public function findNames(array $ids);
+
     public function findAll();
 
     public function delete(OrganizationId $id);

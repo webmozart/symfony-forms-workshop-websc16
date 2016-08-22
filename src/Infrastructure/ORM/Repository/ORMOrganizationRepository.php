@@ -18,6 +18,18 @@ class ORMOrganizationRepository extends ORMRepository implements OrganizationRep
         return $this->doGet($id);
     }
 
+    public function findNames(array $ids)
+    {
+        $result = $this->createQueryBuilder('o')
+            ->select('o.id, o.name')
+            ->where('o.id IN (:ids)')
+            ->setParameter('ids', $ids)
+            ->getQuery()
+            ->getArrayResult();
+
+        return array_column($result, 'name', 'id');
+    }
+
     public function delete(OrganizationId $id)
     {
         return $this->doDelete($id);

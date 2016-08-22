@@ -76,7 +76,7 @@ class Organization
     /**
      * @param Email $email
      */
-    public function setEmail(Email $email)
+    public function setEmail(Email $email = null)
     {
         $this->email = $email;
     }
@@ -92,7 +92,7 @@ class Organization
     /**
      * @param PhoneNumber $phoneNumber
      */
-    public function setPhoneNumber(PhoneNumber $phoneNumber)
+    public function setPhoneNumber(PhoneNumber $phoneNumber = null)
     {
         $this->phoneNumber = $phoneNumber;
     }
@@ -108,7 +108,7 @@ class Organization
     /**
      * @param Address $address
      */
-    public function setAddress(Address $address)
+    public function setAddress(Address $address = null)
     {
         $this->address = $address;
     }

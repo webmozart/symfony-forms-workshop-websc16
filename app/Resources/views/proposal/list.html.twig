@@ -18,14 +18,9 @@
                         <td>{{ contact.fullName }}</td>
                         <td>{{ contact.email }}</td>
                         <td>
-                            <div class="btn-group" role="group">
-                                <a href="{{ path('proposal_approve', {id: contact.id}) }}" class="btn btn-success">
-                                    Approve
-                                </a>
-                                <a href="{{ path('proposal_reject', {id: contact.id}) }}" class="btn btn-danger">
-                                    Reject
-                                </a>
-                            </div>
+                            <a href="{{ path('proposal_show', {id: contact.id}) }}" class="btn btn-primary btn-sm">
+                                <i class="glyphicon glyphicon-search"></i> Check
+                            </a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -35,5 +30,7 @@
         <p>No new contact proposals. \o/</p>
     {% endif %}
 
-    <a href="{{ path('proposal_propose') }}" class="btn btn-default">Propose Contact</a>
+    <a href="{{ path('proposal_propose') }}" class="btn btn-default">
+        <i class="glyphicon glyphicon-plus"></i> Propose Contact
+    </a>
 {% endblock %}

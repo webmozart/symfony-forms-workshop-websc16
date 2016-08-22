@@ -6,24 +6,24 @@ use Contacts\Domain\Contact\ContactId;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
 
-class ContactIdsType extends StringType
+class ORMContactIdType extends StringType
 {
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
-        $value = explode(',', parent::convertToPHPValue($value, $platform));
+        $value = parent::convertToPHPValue($value, $platform);
 
-        return array_map([ContactId::class, 'fromString'], $value);
+        return $value ? ContactId::fromString($value) : null;
     }
 
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        $value = is_array($value) ? array_map('strval', $value) : [];
+        $value = $value instanceof ContactId ? $value->toString() : null;
 
-        return parent::convertToDatabaseValue(implode(',', $value), $platform);
+        return parent::convertToDatabaseValue($value, $platform);
     }
 
     public function getName()
     {
-        return 'contact_ids';
+        return 'contact_id';
     }
 }

@@ -8,8 +8,8 @@
             <generator strategy="NONE"/>
         </id>
         <field name="name" type="string"/>
-        <field name="email" type="email"/>
-        <field name="phoneNumber" type="phone_number"/>
+        <field name="email" type="email" nullable="true"/>
+        <field name="phoneNumber" type="phone_number" nullable="true"/>
         <embedded name="address" class="Contacts\Domain\Value\Address"/>
     </entity>
 

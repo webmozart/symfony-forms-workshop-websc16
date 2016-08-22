@@ -5,7 +5,10 @@
     color: #999;
 }
 
-
 .control-label {
     font-weight: bold;
+}
+
+.datepicker div {
+    display: block;
 }

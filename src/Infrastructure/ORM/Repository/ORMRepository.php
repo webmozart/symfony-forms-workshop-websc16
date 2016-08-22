@@ -5,7 +5,6 @@ namespace Contacts\Infrastructure\ORM\Repository;
 use Contacts\Infrastructure\Framework\NoResult;
 use Doctrine\ORM\EntityNotFoundException;
 use Doctrine\ORM\EntityRepository;
-use RuntimeException;
 
 class ORMRepository extends EntityRepository
 {
