@@ -11,5 +11,4 @@ HTTPDUSER=`ps axo user,comm | grep -E '[a]pache|[h]ttpd|[_]www|[w]ww-data|[n]gin
 sudo setfacl -R -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX var/cache var/data var/logs var/sessions
 sudo setfacl -dR -m u:"$HTTPDUSER":rwX -m u:`whoami`:rwX var/cache var/data var/logs var/sessions
 
-bin/console doctrine:database:create -n
 bin/console doctrine:schema:create -n
