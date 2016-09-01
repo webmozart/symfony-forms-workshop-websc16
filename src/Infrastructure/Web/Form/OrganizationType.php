@@ -21,6 +21,12 @@ class OrganizationType extends AbstractType
                     'message' => 'Please enter a name'
                 ])
             ])
+            ->add('phoneNumber', PhoneNumberType::class, [
+                'required' => false,
+            ])
+            ->add('email', EmailType::class, [
+                'required' => false,
+            ])
             ->add('submit', SubmitType::class)
         ;
     }
