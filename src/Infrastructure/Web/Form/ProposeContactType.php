@@ -29,6 +29,8 @@ class ProposeContactType extends AbstractType implements DataMapperInterface
             ])
             ->add('dateOfBirth', BirthdayType::class, [
                 'required' => false,
+                'widget' => 'single_text',
+                'format' => 'd/M/y',
             ])
             ->add('phoneNumber', PhoneNumberType::class, [
                 'required' => false,
