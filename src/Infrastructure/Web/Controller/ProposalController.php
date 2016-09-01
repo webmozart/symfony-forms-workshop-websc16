@@ -5,6 +5,7 @@ namespace Contacts\Infrastructure\Web\Controller;
 use Contacts\Application\Contact\ApproveContact;
 use Contacts\Application\Contact\RejectContact;
 use Contacts\Domain\Contact\ContactId;
+use Contacts\Infrastructure\Web\Form\ProposeContactType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -31,9 +32,17 @@ class ProposalController extends Controller
      */
     public function proposeAction(Request $request)
     {
-        // TODO create form and pass to view
+        $form = $this->createForm(ProposeContactType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->get('command_bus')->handle($form->getData());
+
+            return $this->redirectToRoute('proposal_list');
+        }
 
         return $this->render('proposal/propose.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 
