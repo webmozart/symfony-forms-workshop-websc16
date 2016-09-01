@@ -18,38 +18,12 @@ class ProposeContactType extends AbstractType implements DataMapperInterface
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('firstName', TextType::class, [
-                'required' => true,
-                'constraints' => new NotNull()
-            ])
-            ->add('lastName', TextType::class, [
-                'required' => true,
-                'constraints' => new NotNull()
-            ])
-            ->add('dateOfBirth', BirthdayType::class, [
-                'required' => false,
-                'widget' => 'single_text',
-                'format' => 'd/M/y',
-            ])
-            ->add('phoneNumber', PhoneNumberType::class, [
-                'required' => false,
-            ])
-            ->add('email', EmailType::class, [
-                'required' => false,
-            ])
-            ->add('address', AddressType::class, [
-                'required' => false,
-            ])
-            ->add('organizationId', OrganizationIdType::class, [
-                'required' => false,
-            ])
-            ->add('notes', TextareaType::class, [
-                'required' => false,
-            ])
-            ->add('submit', SubmitType::class)
-            ->setDataMapper($this)
-        ;
+        $builder->setDataMapper($this);
+    }
+
+    public function getParent()
+    {
+        return GenericContactType::class;
     }
 
     public function mapDataToForms($data, $forms)

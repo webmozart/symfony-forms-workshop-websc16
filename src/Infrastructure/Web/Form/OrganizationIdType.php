@@ -47,7 +47,7 @@ class OrganizationIdType extends AbstractType
             new CallbackTransformer($idToEntity, $entityToId)
         );
     }
-    
+
     public function getParent()
     {
         return EntityType::class;
