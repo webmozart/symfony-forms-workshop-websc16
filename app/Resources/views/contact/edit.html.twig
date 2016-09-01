@@ -3,5 +3,5 @@
 {% block body %}
     <h1 class="page-header">{{ contact.fullName }}</h1>
 
-    {{ form(form) }}
+    {{ include('contact/form.html.twig', {'submit_label': 'Modify'}) }}
 {% endblock %}

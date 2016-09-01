@@ -3,34 +3,5 @@
 {% block body %}
     <h1 class="page-header">Propose Contact</h1>
 
-    {{ form_start(form) }}
-    {{ form_row(form.firstName) }}
-    {{ form_row(form.lastName) }}
-    {{ form_row(form.dateOfBirth, {
-        'attr': {'class': 'bootstrap-datepicker'}
-    }) }}
-
-    <fieldset>
-        <legend>Contact Information</legend>
-        {{ form_row(form.email) }}
-        {{ form_row(form.phoneNumber) }}
-        {{ form_row(form.address.street) }}
-        {{ form_row(form.address.postalCode) }}
-        {{ form_row(form.address.city) }}
-        {{ form_row(form.address.countryCode, {
-            'label': 'Country',
-        }) }}
-    </fieldset>
-
-    <fieldset>
-        <legend>Additional Information</legend>
-        {{ form_row(form.organizationId) }}
-        {{ form_row(form.notes) }}
-    </fieldset>
-
-    {{ form_row(form.submit, {
-        'label': 'Propose',
-    }) }}
-
-    {{ form_end(form) }}
+    {{ include('contact/form.html.twig', {'submit_label': 'Propose'}) }}
 {% endblock %}
