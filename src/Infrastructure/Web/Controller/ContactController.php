@@ -5,6 +5,7 @@ namespace Contacts\Infrastructure\Web\Controller;
 use Contacts\Application\Contact\DeleteContact;
 use Contacts\Domain\Contact\ContactId;
 use Contacts\Infrastructure\Util\ObjectArray;
+use Contacts\Infrastructure\Web\Form\ModifyContactType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,10 +49,18 @@ class ContactController extends Controller
     {
         $contact = $this->get('contact_repository')->get(ContactId::fromString($id));
 
-        // TODO create form and pass to view
+        $form = $this->createForm(ModifyContactType::class, $contact);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->get('command_bus')->handle($form->getData());
+
+            return $this->redirectToRoute('contact_list');
+        }
 
         return $this->render('contact/edit.html.twig', [
             'contact' => $contact,
+            'form' => $form->createView(),
         ]);
     }
 
