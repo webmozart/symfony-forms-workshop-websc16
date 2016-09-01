@@ -27,6 +27,9 @@ class OrganizationType extends AbstractType
             ->add('email', EmailType::class, [
                 'required' => false,
             ])
+            ->add('address', AddressType::class, [
+                'required' => false,
+            ])
             ->add('submit', SubmitType::class)
         ;
     }
